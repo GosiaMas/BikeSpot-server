@@ -2,16 +2,12 @@ const { Schema, model } = require("mongoose");
 const ObjectId = Schema.Types.ObjectId;
 
 const transactionSchema = new Schema({
-  address: {
-    type: String,
-    required: true,
-  },
-  longitude: Number,
-  latitude: Number,
-  vacantSpaces: 100,
-  userBooking: [{ type: Schema.Types.ObjectId, ref: "User" }],
+  transUser: [{ type: Schema.Types.ObjectId, ref: "User" }],
+  transSpot: [{ type: Schema.Types.ObjectId, ref: "Spot" }],
+  date: { type: Date, default: new Date() },
+  ammount: Number,
 });
 
-const Session = model("Session", sessionSchema);
+const Transaction = model("Transaction", transactionSchema);
 
-module.exports = Session;
+module.exports = Transaction;
