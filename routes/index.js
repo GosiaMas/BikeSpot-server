@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const authRoutes = require("./auth");
 const spotRoutes = require("./spot");
-const paymentRoutes = require("./payment.js");
+const paymentRoutes = require("./payment");
 //const profileRoutes = require("./profile");
 
 /* GET home page */
