@@ -2,7 +2,7 @@ const router = require("express").Router();
 const authRoutes = require("./auth");
 const spotRoutes = require("./spot");
 const paymentRoutes = require("./payment");
-//const profileRoutes = require("./profile");
+// const profileRoutes = require("./profile");
 
 /* GET home page */
 router.get("/", (req, res, next) => {

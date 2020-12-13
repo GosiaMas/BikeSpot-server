@@ -23,6 +23,9 @@ router.post("/create-payment-intent", async (req, res) => {
     amount: calculateOrderAmount(items),
     currency: "eur",
   });
+
+  //here we need to update DB Spot with user ID and create a transaction on Transaction model with User ID, spot ID and ammount
+
   res.send({
     clientSecret: paymentIntent.client_secret,
   });
