@@ -2,6 +2,8 @@ const express = require("express");
 const isLoggedIn = require("../middlewares/isLoggedIn");
 const router = express.Router();
 const User = require("../models/User.model");
+const Spot = require("../models/Spot");
+const Transaction = require("../models/Transaction");
 
 router.delete("/delete/:id", isLoggedIn, (req, res) => {
   //   console.log(req.params);
@@ -18,12 +20,17 @@ router.delete("/delete/:id", isLoggedIn, (req, res) => {
 });
 
 router.get("/", isLoggedIn, (req, res) => {
-  console.log("Profile user", req.params);
-  const { id } = req.params;
-
-  // Spot.find().then((allSpots)=> {
-  // allSpots.filter((spot)=> spot.)
-  // })
+  //console.log("Profile user", req.user);
+  //   res.json(true);
+  const { _id } = req.user;
+  Transaction.find({
+    transUser: _id,
+  })
+    .populate("transSpot")
+    .then((allTrans) => {
+      console.log(allTrans[0]);
+      res.json({ allTrans });
+    });
 });
 
 module.exports = router;
