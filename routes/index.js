@@ -2,7 +2,7 @@ const router = require("express").Router();
 const authRoutes = require("./auth");
 const spotRoutes = require("./spot");
 const paymentRoutes = require("./payment");
-// const profileRoutes = require("./profile");
+const profileRoutes = require("./profile");
 
 /* GET home page */
 router.get("/", (req, res, next) => {
@@ -10,8 +10,8 @@ router.get("/", (req, res, next) => {
 });
 
 router.use("/auth", authRoutes);
-// router.use("/profile", profileRoutes);
+router.use("/profile", profileRoutes);
 router.use("/spots", spotRoutes);
-router.use("/payment/:id", paymentRoutes);
+router.use("/payment", paymentRoutes);
 
 module.exports = router;
