@@ -14,7 +14,7 @@ router.delete("/delete/:id", isLoggedIn, (req, res) => {
   }
 
   User.findByIdAndDelete(id).then((deleteInfo) => {
-    console.log(deleteInfo);
+    // console.log(deleteInfo);
     res.json({ message: "User deleted" });
   });
 });
@@ -28,7 +28,7 @@ router.get("/", isLoggedIn, (req, res) => {
   })
     .populate("transSpot")
     .then((allTrans) => {
-      console.log(allTrans[0]);
+      //   console.log(allTrans[0]);
       res.json({ allTrans });
     });
 });

@@ -4,7 +4,7 @@ const Spot = require("../models/Spot");
 router.get("/", (req, res, next) => {
   Spot.find().then((allSpots) => {
     res.json(allSpots);
-    console.log(allSpots);
+    // console.log(allSpots);
   });
 });
 
