@@ -13,15 +13,43 @@ router.post("/:id", isLoggedIn, (req, res) => {
   console.log("old Spot", req.params.id);
   console.log("newSpot", req.body.newSpotId.selectedSpotId);
   console.log("user", req.user._id);
-  Spot.findByIdAndUpdate(req.params.id),
-    {
-      userBooking: userBooking.splice(indexOf(req.user._id), 1),
-      vacantSpaces: Number(vacantSpaces)++,
-    };
+  // });
+  const oldSpotId = req.params.id;
+  const newSpotId = req.body.newSpotId.selectedSpotId;
+  const userId = req.user._id;
 
-  //userBooking.splice(indexOf(req.user._id), 1)
+  Spot.findByIdAndUpdate(oldSpotId, {
+    $pull: { userBooking: userId },
+    $inc: { vacantSpaces: 1 },
+  }).then(() => {
+    Spot.findByIdAndUpdate(newSpotId, {
+      $addToSet: { userBooking: userId },
+      $inc: { vacantSpaces: -1 },
+    }).then(() => res.json("successChanging"));
+  });
+
+  // Spot.findByIdAndUpdate(oldSpotId),
+  //   {
+  //     userBooking: userBooking.splice(indexOf(userId), 1),
+  //     vacantSpaces: vacantSpaces++,
+  //   }.then(() => {
+  //     Spot.findByIdAndUpdate(newSpotId),
+  //       {
+  //         userBooking: [...userBooking, userId],
+  //         vacantSpaces: Number(vacantSpaces)--,
+  //       }.
+  // then(() => {
+  //   Transaction.findByIdandUpdate({
+  //     transUser: { $in: ["userId"] },
+  //   }),
+  //     {
+  //       transSpot: transSpot.splice(indexOf(oldSpotId), 1, newSpotId),
+  //     }.then(() => res.json("all good"));
+  // });
+  // });
 });
 
+// OLD CODE BELOW!!!!!!
 // router.post("/success", isLoggedIn, (req, res) => {
 //   Transaction.create({
 //     transSpot: req.body.transSpot,
