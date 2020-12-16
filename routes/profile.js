@@ -13,9 +13,14 @@ router.delete("/delete/:id", isLoggedIn, (req, res) => {
     return res.json("You are not authorised to delete this user");
   }
 
-  User.findByIdAndDelete(id).then((deleteInfo) => {
-    // console.log(deleteInfo);
-    res.json({ message: "User deleted" });
+  User.findByIdAndDelete(id).then(() => {
+    Spot.findOneAndUpdate(
+      { userBooking: { $in: id } },
+      { $inc: { vacantSpaces: 1 } }
+    ).then((deleteInfo) => {
+      // console.log(deleteInfo);
+      res.json({ message: "User deleted" });
+    });
   });
 });
 

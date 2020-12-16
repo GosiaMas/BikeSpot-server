@@ -37,7 +37,7 @@ router.post("/success", isLoggedIn, (req, res) => {
     // console.log("THIS ONE", reg.body.transSpot);
     Spot.findByIdAndUpdate(req.body.transSpot, {
       userBooking: req.user._id,
-      // vacantSpaces: Number--,
+      $inc: { vacantSpaces: -1 },
     }).then(() => {
       res.json("all good");
     });
