@@ -17,9 +17,23 @@ router.post("/:id", isLoggedIn, (req, res) => {
     {
       userBooking: userBooking.splice(indexOf(req.user._id), 1),
       vacantSpaces: Number(vacantSpaces)++,
-    };
-
-  //userBooking.splice(indexOf(req.user._id), 1)
+    }.then(() => {
+      Spot.findByIdAndUpdate(req.body.newSpotId.selectedSpotId),
+        {
+          userBooking: userBooking.push(req.body.newSpotId.selectedSpotId),
+          vacantSpaces: Number(vacantSpaces)--,
+        }.then(() => {
+          Transaction.findByIdandUpdate(req.user._id),
+            {
+              transSpot: transSpot.splice(indexOf(req.params.id), 1),
+            }.then(() => {
+              Transaction.findByIdandUpdate(req.body.newSpotId.selectedSpotId),
+                {
+                  transSpot: transSpot.push(req.body.newSpotId.selectedSpotId),
+                };
+            });
+        });
+    });
 });
 
 // router.post("/success", isLoggedIn, (req, res) => {
