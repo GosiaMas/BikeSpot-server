@@ -24,40 +24,5 @@ router.post("/:id", isLoggedIn, (req, res) => {
       $inc: { vacantSpaces: -1 },
     }).then(() => res.json("successChanging"));
   });
-  // Spot.findByIdAndUpdate(oldSpotId),
-  //   {
-  //     userBooking: userBooking.splice(indexOf(userId), 1),
-  //     vacantSpaces: vacantSpaces++,
-  //   }.then(() => {
-  //     Spot.findByIdAndUpdate(newSpotId),
-  //       {
-  //         userBooking: [...userBooking, userId],
-  //         vacantSpaces: Number(vacantSpaces)--,
-  //       }.
-  // then(() => {
-  //   Transaction.findByIdandUpdate({
-  //     transUser: { $in: ["userId"] },
-  //   }),
-  //     {
-  //       transSpot: transSpot.splice(indexOf(oldSpotId), 1, newSpotId),
-  //     }.then(() => res.json("all good"));
-  // });
-  // });
 });
-// OLD CODE BELOW!!!!!!
-// router.post("/success", isLoggedIn, (req, res) => {
-//   Transaction.create({
-//     transSpot: req.body.transSpot,
-//     transUser: req.user._id,
-//     ammount: 15.0,
-//   }).then(() => {
-//     // console.log("THIS ONE", reg.body.transSpot);
-//     Spot.findByIdAndUpdate(req.body.transSpot, {
-//       userBooking: req.user._id,
-//       // vacantSpaces: Number--,
-//     }).then(() => {
-//       res.json("all good");
-//     });
-//   });
-// });
 module.exports = router;
