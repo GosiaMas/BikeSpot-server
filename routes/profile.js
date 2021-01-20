@@ -4,6 +4,7 @@ const router = express.Router();
 const User = require("../models/User.model");
 const Spot = require("../models/Spot");
 const Transaction = require("../models/Transaction");
+
 router.delete("/delete/:id", isLoggedIn, (req, res) => {
   //   console.log(req.params);
   const { id } = req.params;
@@ -21,6 +22,7 @@ router.delete("/delete/:id", isLoggedIn, (req, res) => {
     });
   });
 });
+
 router.get("/", isLoggedIn, (req, res) => {
   //console.log("Profile user", req.user);
   //   res.json(true);
