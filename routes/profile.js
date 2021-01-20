@@ -4,6 +4,7 @@ const router = express.Router();
 const User = require("../models/User.model");
 const Spot = require("../models/Spot");
 const Transaction = require("../models/Transaction");
+const qr = require("qrcode");
 
 router.delete("/delete/:id", isLoggedIn, (req, res) => {
   //   console.log(req.params);
@@ -36,4 +37,23 @@ router.get("/", isLoggedIn, (req, res) => {
       res.json({ allTrans });
     });
 });
+
+// catch below sent QR code info
+router.get("/QRcode/:id", isLoggedIn, (req, res) => {
+  //to get spot ID from link:
+  // console.log(req.params.id);
+  //to get user ID from headers:
+  //console.log(req.user.password);
+
+  const text = req.params.id;
+  qr.toDataURL(text, (error, url) => {
+    //console.log(url);
+    if (error) {
+      res.json({ message: "Error occured" });
+    }
+    //console.log(url);
+    res.json({ url });
+  });
+});
+
 module.exports = router;
